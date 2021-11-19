@@ -1,4 +1,4 @@
-module go-bus
+module bus
 
 go 1.13
 
