@@ -18,7 +18,7 @@ import (
 
 func main() {
 	b := bus.New()
-	sub := b.Subscribe([]string{"my", "topic"}, func(t []string, p interface{}) {
+	sub := b.Subscribe([]string{"my", "topic"}, func(t []string, s *bus.Subscription, p interface{}) {
 		fmt.Printf("%v world", p)
 	})
 	b.Publish([]string{"my", "topic"}, "hello")

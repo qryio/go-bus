@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-type Handler func(t []string, p interface{})
+type Handler func(t []string, s *Subscription, p interface{})
 
 type Bus struct {
 	root  *tree.Node
@@ -13,8 +13,9 @@ type Bus struct {
 }
 
 type Subscription struct {
-	bus	  *Bus
-	entry *tree.Entry
+	bus	  	*Bus
+	handler	Handler
+	entry 	*tree.Entry
 }
 
 func New() *Bus {
@@ -22,15 +23,21 @@ func New() *Bus {
 }
 
 func (b *Bus) Subscribe(t []string, h Handler) *Subscription {
+	s := &Subscription{ bus: b, handler: h }
 	b.mutex.Lock()
-	e := b.root.Add(t, h)
+	e := b.root.Add(t, s)
+	s.handler = h
+	s.entry = e
 	b.mutex.Unlock()
-	return &Subscription{b, e}
+	return s
 }
 
 func (b *Bus) Publish(t []string, p interface{}) {
 	b.mutex.RLock()
-	b.root.Accept(t, func(h interface{}) { h.(Handler)(t, p) })
+	b.root.Accept(t, func(d interface{}) {
+		s := d.(*Subscription)
+		s.handler(t, s, p)
+	})
 	b.mutex.RUnlock()
 }
 
