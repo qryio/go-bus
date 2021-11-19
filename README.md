@@ -1,6 +1,6 @@
 # go-bus
 
-![test](https://github.com/tsouza/go-bus/actions/workflows/test/badge.svg)
+![test](https://github.com/tsouza/go-bus/actions/workflows/test.yml/badge.svg)
 
 `go-bus` is a lightweight golang library for implementing the [pub/sub pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern). It supports wildcard topics as well as dynamic topic subscription.
 
