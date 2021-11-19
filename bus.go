@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-type Handler func(p interface{})
+type Handler func(t []string, p interface{})
 
 type Bus struct {
 	root  *tree.Node
@@ -30,7 +30,7 @@ func (b *Bus) Subscribe(t []string, h Handler) *Subscription {
 
 func (b *Bus) Publish(t []string, p interface{}) {
 	b.mutex.RLock()
-	b.root.Accept(t, func(h interface{}) { h.(Handler)(p) })
+	b.root.Accept(t, func(h interface{}) { h.(Handler)(t, p) })
 	b.mutex.RUnlock()
 }
 
