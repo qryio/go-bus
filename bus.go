@@ -8,7 +8,7 @@ import (
 type Handler func(p interface{})
 
 type Bus struct {
-	root  tree.Node
+	root  *tree.Node
 	mutex sync.RWMutex
 }
 
@@ -18,7 +18,7 @@ type Subscription struct {
 }
 
 func New() *Bus {
-	return &Bus{}
+	return &Bus{ root: tree.NewRoot() }
 }
 
 func (b *Bus) Subscribe(t []string, h Handler) *Subscription {
