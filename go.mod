@@ -1,4 +1,4 @@
-module github.com/tsouza/go-bus
+module github.com/qryio/go-bus
 
 go 1.13
 

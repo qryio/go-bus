@@ -1,7 +1,7 @@
 package bus
 
 import (
-	"github.com/tsouza/go-bus/tree"
+	"github.com/qryio/go-bus/tree"
 	"sync"
 )
 
