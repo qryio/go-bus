@@ -2,7 +2,7 @@ package examples
 
 import (
 	"fmt"
-	"github.com/qryio/go-bus"
+	"github.com/tsouza/go-bus"
 	"testing"
 )
 
